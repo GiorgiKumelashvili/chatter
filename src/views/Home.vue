@@ -108,6 +108,9 @@ export default {
 
             this.$store.dispatch('setMessage', newMessageObject);
 
+            // resize height
+            this.height = 0;
+
             // clear message place
             this.message = null;
         },

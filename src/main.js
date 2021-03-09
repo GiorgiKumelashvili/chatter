@@ -20,5 +20,5 @@ new Vue({
 /*TODO
 
     ( ) message send area resize problem
-
+    ( ) responsivnes for mobile
 */
