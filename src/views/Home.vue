@@ -157,11 +157,11 @@ export default {
 }
 
 .message-item {
-    max-width: var(--width);
+    max-width: var(--message-area-width);
 }
 
 .current-user-item {
-    max-width: calc(var(--width) - 2rem);
+    max-width: calc(var(--message-area-width) - 2rem);
 }
 
 .message-item-text {

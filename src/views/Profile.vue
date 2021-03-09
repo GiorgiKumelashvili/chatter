@@ -38,7 +38,7 @@ export default {
     data: () => ({
         darkMode: null,
         params: {
-            client_id: '536889969464-0om7g4vnhcmdaqk9dfrmaikvu7j653ke.apps.googleusercontent.com'
+            client_id: process.env.VUE_APP_GOOGLE_ID
         }
     }),
     created() {
@@ -47,9 +47,12 @@ export default {
     methods: {
         toggleDarkMode() {
             const bool = !this.darkMode;
-
             this.darkMode = bool;
+
+            // For immediate response
             this.$vuetify.theme.dark = bool;
+
+            // Set in local
             localStorage.setItem('darkMode', bool);
         },
         logout() {
