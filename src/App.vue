@@ -3,17 +3,16 @@
         <v-navigation-drawer v-if="isLoggedIn" floating permanent app dark>
             <v-list dense rounded>
                 <v-list-item class="px-2 py-4">
-                    <v-avatar class="pr-4">
-                        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+                    <v-avatar class="mr-3">
+                        <img :src="img" alt="John" />
                     </v-avatar>
-                    <!-- John Donaster -->
                     <div>
-                        <v-list-item-title class="title pb-2">
-                            Sandra Adams
+                        <v-list-item-title class="title pb-2 text-truncate" style="max-width:10rem">
+                            {{ fullName }}
                         </v-list-item-title>
 
-                        <v-list-item-subtitle>
-                            sandra_a88@gmail.com
+                        <v-list-item-subtitle class="text-truncate" style="max-width:10rem">
+                            {{ email }}
                         </v-list-item-subtitle>
                     </div>
                 </v-list-item>
@@ -58,10 +57,32 @@ export default {
     }),
     created() {
         this.setLogged();
+
+        this.setUserProfile();
     },
     methods: {
         async setLogged() {
             this.isLoggedIn = await Func.isAuthenticated();
+        },
+
+        setUserProfile() {
+            //TODO gadaitane navigation componentshi roca gaaketeb
+            const user = localStorage.getItem('user');
+
+            if (user) {
+                this.$store.commit('SET_USER_DATA', JSON.parse(user));
+            }
+        }
+    },
+    computed: {
+        fullName() {
+            return this.$store.getters.fullName;
+        },
+        email() {
+            return this.$store.getters.email;
+        },
+        img() {
+            return this.$store.getters.img;
         }
     }
 };

@@ -47,7 +47,7 @@ export default {
             this.$router.go({ name: 'Home' });
 
             // This only gets the user information: id, name, imageUrl and email
-            console.log(googleUser.getBasicProfile());
+            this.$store.commit('SET_USER_DATA', googleUser.getBasicProfile());
         }
     }
 };

@@ -1,7 +1,7 @@
+import Const from '@/utils/Const';
 import Func from '@/utils/Func';
 import Vue from 'vue';
 import Vuex from 'vuex';
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -93,6 +93,8 @@ export default new Vuex.Store({
                 return null;
             }
 
+            localStorage.setItem('user', JSON.stringify(payload));
+
             // set user data
             state.user = payload;
         },
@@ -124,7 +126,11 @@ export default new Vuex.Store({
             }
 
             return 0;
-        }
+        },
+
+        fullName: state => state.user[Const.user.fullName],
+        email: state => state.user[Const.user.email],
+        img: state => state.user[Const.user.img]
     },
     modules: {},
     strict: true
