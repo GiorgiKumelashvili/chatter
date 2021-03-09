@@ -132,7 +132,8 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/test.css';
+/* Only for this page */
+@import '../assets/css/messaging.css';
 
 #mees {
     max-height: 85vh;
