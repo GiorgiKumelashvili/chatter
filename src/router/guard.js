@@ -1,9 +1,8 @@
-// import router from './router';
+import router from '@/router/router';
 
-// const isLoggedIn = () => localStorage.getItem('isAuthenticated');
+const isLoggedIn = () => localStorage.getItem('authenticated');
 
-// router.beforeEach((to, from, next) => {
-//     if (to.name !== 'register' && to.name !== 'login' && !isLoggedIn()) {
-//         next({ name: 'login' });
-//     } else next();
-// });
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'Login' && !isLoggedIn()) next({ name: 'Login' });
+    else next();
+});

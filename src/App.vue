@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer floating permanent app dark>
+        <v-navigation-drawer v-if="isLoggedIn" floating permanent app dark>
             <v-list dense rounded>
                 <v-list-item class="px-2 py-4">
                     <v-avatar class="pr-4">
@@ -52,6 +52,11 @@ export default {
             { title: 'Chat Group', icon: 'mdi-forum', name: 'Home' },
             { title: 'Profile', icon: 'mdi-account-circle', name: 'Profile' }
         ]
-    })
+    }),
+    computed: {
+        isLoggedIn() {
+            return localStorage.getItem('authenticated');
+        }
+    }
 };
 </script>

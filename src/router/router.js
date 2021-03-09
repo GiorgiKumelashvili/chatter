@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 
 // lazy load
 const Profile = () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue');
+const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login.vue');
 
 Vue.use(VueRouter);
 
@@ -12,6 +13,11 @@ const routes = [
         path: '/',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
     },
     {
         path: '/profile',
