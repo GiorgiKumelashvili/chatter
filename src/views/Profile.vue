@@ -4,7 +4,6 @@
             <v-card-title>
                 Profile
             </v-card-title>
-            {{ darkMode }}
 
             <v-list-item @click="toggleDarkMode()">
                 <v-list-item-subtitle>Dark mode</v-list-item-subtitle>
