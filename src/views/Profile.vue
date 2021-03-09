@@ -13,22 +13,33 @@
                 </v-list-item-icon>
             </v-list-item>
 
-            <v-list-item ripple @click="() => {}">
-                <v-list-item-subtitle>Logout</v-list-item-subtitle>
-                <v-list-item-icon>
-                    <v-icon>mdi-login-variant</v-icon>
-                </v-list-item-icon>
-            </v-list-item>
+            <GoogleLogin :params="params" :logoutButton="true" style="width:100%">
+                <v-list-item ripple @click="logout()">
+                    <v-list-item-subtitle class="text-start">
+                        Logout
+                    </v-list-item-subtitle>
+                    <v-list-item-icon>
+                        <v-icon>mdi-login-variant</v-icon>
+                    </v-list-item-icon>
+                </v-list-item>
+            </GoogleLogin>
         </v-card>
     </v-container>
 </template>
 
 <script>
 import Func from '@/utils/Func';
+import GoogleLogin from 'vue-google-login';
 
 export default {
+    components: {
+        GoogleLogin
+    },
     data: () => ({
-        darkMode: null
+        darkMode: null,
+        params: {
+            client_id: '536889969464-0om7g4vnhcmdaqk9dfrmaikvu7j653ke.apps.googleusercontent.com'
+        }
     }),
     created() {
         this.darkMode = Func.getDarkMode();
@@ -36,12 +47,22 @@ export default {
     methods: {
         toggleDarkMode() {
             const bool = !this.darkMode;
-            console.log(bool);
 
             this.darkMode = bool;
             this.$vuetify.theme.dark = bool;
             localStorage.setItem('darkMode', bool);
+        },
+        logout() {
+            Func.removeAuthenticated();
+            this.$router.go({ name: 'Login' });
         }
     }
 };
 </script>
+
+<style scoped>
+.x {
+    width: 100%;
+    height: 100%;
+}
+</style>

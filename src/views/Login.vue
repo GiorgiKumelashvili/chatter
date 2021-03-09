@@ -14,15 +14,44 @@
                 Message random people on chatter, anytime, anywhere
             </h2>
 
-            <v-btn>
-                google login
-            </v-btn>
+            <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" />
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+import GoogleLogin from 'vue-google-login';
+import Func from '@/utils/Func';
+
+export default {
+    components: {
+        GoogleLogin
+    },
+    data() {
+        return {
+            // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
+            params: {
+                client_id:
+                    '536889969464-0om7g4vnhcmdaqk9dfrmaikvu7j653ke.apps.googleusercontent.com'
+            },
+            // only needed if you want to render the button with the google ui
+            renderParams: {
+                width: 250,
+                height: 50,
+                longtitle: true
+            }
+        };
+    },
+    methods: {
+        onSuccess(googleUser) {
+            Func.setAuthenticated();
+            this.$router.go({ name: 'Home' });
+
+            // This only gets the user information: id, name, imageUrl and email
+            console.log(googleUser.getBasicProfile());
+        }
+    }
+};
 </script>
 
 <style scoped>

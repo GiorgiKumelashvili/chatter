@@ -1,3 +1,9 @@
+/**
+ * @author Giorgi Kumelashvili // giorgi.kumelashvili21@gmail.com
+ * @version 0.0.1
+ * @since Mar 2, 2021
+ */
+
 import Vue from 'vue';
 import App from '@/App.vue';
 import store from '@/store/store';

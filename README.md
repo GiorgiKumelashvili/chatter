@@ -1,29 +1,23 @@
-# chatter
+# Chatter
 
-## Project setup
+Global chat application
 
-```
-npm install
-```
+#### version 0.0.1
 
-### Compiles and hot-reloads for development
+### Technologies
 
-```
-npm run serve
-```
+-   Vue
 
-### Compiles and minifies for production
+    -   [axios](https://github.com/axios/axios)
+    -   [vue-google-login](https://www.npmjs.com/package/vue-google-login)
 
-```
-npm run build
-```
+-   Laravel
+    -   [laravel-websockets](https://laravel.com/docs/8.x/broadcasting)
 
-### Lints and fixes files
+### License
 
-```
-npm run lint
-```
+[MIT](https://choosealicense.com/licenses/mit/)
 
-### Customize configuration
+### Website
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Chatter](https://addlater.com)

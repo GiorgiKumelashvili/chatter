@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import Func from '@/utils/Func';
 export default {
     name: 'App',
 
@@ -51,11 +52,16 @@ export default {
         items: [
             { title: 'Chat Group', icon: 'mdi-forum', name: 'Home' },
             { title: 'Profile', icon: 'mdi-account-circle', name: 'Profile' }
-        ]
+        ],
+
+        isLoggedIn: null
     }),
-    computed: {
-        isLoggedIn() {
-            return localStorage.getItem('authenticated');
+    created() {
+        this.setLogged();
+    },
+    methods: {
+        async setLogged() {
+            this.isLoggedIn = await Func.isAuthenticated();
         }
     }
 };

@@ -1,8 +1,10 @@
 import router from '@/router/router';
+import Func from '@/utils/Func';
 
-const isLoggedIn = () => localStorage.getItem('authenticated');
+router.beforeEach(async (to, from, next) => {
+    const authenticated = await Func.isAuthenticated();
 
-router.beforeEach((to, from, next) => {
-    if (to.name !== 'Login' && !isLoggedIn()) next({ name: 'Login' });
+    if (to.name !== 'Login' && !authenticated) next({ name: 'Login' });
+    else if (to.name == 'Login' && authenticated) next({ name: 'Home' });
     else next();
 });
