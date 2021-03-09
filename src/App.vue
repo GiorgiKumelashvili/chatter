@@ -49,8 +49,8 @@ export default {
 
     data: () => ({
         items: [
-            { title: 'Chat Group', icon: 'mdi-view-dashboard', name: 'Home' },
-            { title: 'Profile', icon: 'mdi-forum', name: 'Profile' }
+            { title: 'Chat Group', icon: 'mdi-forum', name: 'Home' },
+            { title: 'Profile', icon: 'mdi-account-circle', name: 'Profile' }
         ]
     })
 };
