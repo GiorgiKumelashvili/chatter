@@ -16,3 +16,9 @@ new Vue({
     vuetify,
     render: h => h(App)
 }).$mount('#app');
+
+/*TODO
+
+    ( ) message send area resize problem
+
+*/
