@@ -135,6 +135,10 @@ export default {
 /* Only for this page */
 @import '../assets/css/messaging.css';
 
+textarea#input-24 {
+    background-color: rebeccapurple !important;
+}
+
 #mees {
     max-height: 85vh;
     overflow: hidden;
@@ -166,6 +170,7 @@ export default {
 }
 
 .message-item-text {
+    word-break: break-all;
     background-image: linear-gradient(to top right, #2f7bff, #005eff);
 }
 
