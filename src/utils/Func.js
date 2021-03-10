@@ -13,14 +13,6 @@ class Func {
         return JSON.parse(localStorage.getItem('darkMode'));
     }
 
-    static setAuthenticated() {
-        localStorage.setItem('authenticated', true);
-    }
-
-    static removeAuthenticated() {
-        localStorage.removeItem('authenticated');
-    }
-
     static async isAuthenticated() {
         Vue.use(LoaderPlugin, {
             client_id: process.env.VUE_APP_GOOGLE_ID
@@ -31,7 +23,6 @@ class Func {
         try {
             const auth2 = await Vue.GoogleAuth;
             bool = auth2.isSignedIn.get();
-            localStorage.setItem('authenticated', bool);
         } catch (error) {
             console.log(error);
         }

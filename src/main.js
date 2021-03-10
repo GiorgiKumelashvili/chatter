@@ -25,9 +25,9 @@ new Vue({
     vuetify,
     render: h => h(App)
 }).$mount('#app');
-
 /*TODO
 
     ( ) message send area resize problem
     ( ) responsivnes for mobile
+    ( ) remove stuff from localstorage when logged out !!!
 */

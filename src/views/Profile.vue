@@ -24,12 +24,15 @@
                 </v-list-item>
             </GoogleLogin>
         </v-card>
+        <v-btn @click="test">test</v-btn>
     </v-container>
 </template>
 
 <script>
 import Func from '@/utils/Func';
 import GoogleLogin from 'vue-google-login';
+
+import axios from 'axios';
 
 export default {
     components: {
@@ -56,8 +59,14 @@ export default {
             localStorage.setItem('darkMode', bool);
         },
         logout() {
-            Func.removeAuthenticated();
             this.$router.go({ name: 'Login' });
+        },
+        test() {
+            // auth on backend
+            const url = 'http://localhost:8000/api/test';
+            const obj = { token: localStorage.getItem('token') };
+
+            axios.post(url, obj).then(res => console.log(res));
         }
     }
 };

@@ -10,7 +10,7 @@
                 </v-icon>
             </div>
 
-            <h2 class="my-7">
+            <h2 class="my-7 text-center">
                 Message random people on chatter, anytime, anywhere
             </h2>
 
@@ -21,7 +21,6 @@
 
 <script>
 import GoogleLogin from 'vue-google-login';
-import Func from '@/utils/Func';
 
 export default {
     components: {
@@ -43,11 +42,17 @@ export default {
     },
     methods: {
         onSuccess(googleUser) {
-            Func.setAuthenticated();
-            this.$router.go({ name: 'Home' });
+            const basicProfile = googleUser.getBasicProfile();
+            const token = googleUser.uc.id_token;
 
             // This only gets the user information: id, name, imageUrl and email
-            this.$store.commit('SET_USER_DATA', googleUser.getBasicProfile());
+            this.$store.commit('SET_USER_DATA', basicProfile);
+
+            // Sets token
+            this.$store.commit('SET_USER_TOKEN', token);
+
+            // Redirect
+            this.$router.push({ name: 'Home' });
         }
     }
 };
