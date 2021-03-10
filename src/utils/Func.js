@@ -6,19 +6,11 @@ class Func {
         if (!id) return;
 
         const el = document.getElementById(id);
-        setTimeout(() => {
-            el.scrollTop = el.scrollHeight;
-        }, 100);
+        setTimeout(() => (el.scrollTop = el.scrollHeight), 100);
     }
 
     static getDarkMode() {
-        let isDark = localStorage.getItem('darkMode') ?? false;
-
-        if (typeof isDark !== 'undefined' && isDark !== null) {
-            isDark = isDark == 'true';
-        }
-
-        return isDark;
+        return JSON.parse(localStorage.getItem('darkMode'));
     }
 
     static setAuthenticated() {
@@ -39,11 +31,10 @@ class Func {
         try {
             const auth2 = await Vue.GoogleAuth;
             bool = auth2.isSignedIn.get();
+            localStorage.setItem('authenticated', bool);
         } catch (error) {
             console.log(error);
         }
-
-        localStorage.setItem('authenticated', bool);
 
         return bool;
     }
