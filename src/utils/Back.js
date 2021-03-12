@@ -82,7 +82,7 @@ class Back {
      * @returns {Promise}
      */
     static retrieveToken() {
-        const url = '/authenticate/retrieve';
+        const url = '/token/retrieve';
 
         return backWithoutToken
             .post(url, null, Back.HEADERS)
