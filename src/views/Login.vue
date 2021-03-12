@@ -22,6 +22,7 @@
 <script>
 import GoogleLogin from 'vue-google-login';
 // import axios from 'axios';
+import Const from '@/utils/Const';
 import Back from '@/utils/Back';
 
 export default {
@@ -45,8 +46,8 @@ export default {
     methods: {
         onSuccess(googleUser) {
             const basicProfile = googleUser.getBasicProfile();
-            const token = googleUser.uc.id_token;
-            const id = basicProfile.kR;
+            const token = googleUser[Const.user.idToken].id_token;
+            const id = basicProfile[Const.user.id];
 
             // This only gets the user information: id, name, imageUrl and email
             this.$store.commit('SET_USER_DATA', basicProfile);

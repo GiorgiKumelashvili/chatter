@@ -58,7 +58,7 @@ export default {
             localStorage.setItem('darkMode', bool);
         },
         logout() {
-            this.$router.go({ name: 'Login' });
+            Back.logout();
         },
         async test() {
             const d = await Back.Service('/test');

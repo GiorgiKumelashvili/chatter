@@ -8,6 +8,7 @@ export default {
     },
 
     user: {
+        idToken: 'uc',
         fullName: 'sd',
         id: 'kR',
         img: 'jI',
@@ -16,7 +17,5 @@ export default {
         email: 'nt'
     },
 
-    names: {
-        token: 'accessToken'
-    }
+    routes: {}
 };

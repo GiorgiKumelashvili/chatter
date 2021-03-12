@@ -29,5 +29,6 @@ new Vue({
 
     ( ) message send area resize problem
     ( ) responsivnes for mobile
-    ( ) remove stuff from localstorage and cookies when logged out !!!
+    ( ) remove stuff from localstorage and cookies (access_token) when logged out !!!
+    ( ) remove all hardcode routes and get it to const
 */

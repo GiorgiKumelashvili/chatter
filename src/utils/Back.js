@@ -1,3 +1,4 @@
+import router from '@/router/router';
 import Vue from 'vue';
 import { LoaderPlugin } from 'vue-google-login';
 import Axios from './Axios';
@@ -20,7 +21,10 @@ class Back {
         return back
             .post(url, obj)
             .then(res => res.data)
-            .catch(err => err);
+            .catch(() => {
+                // redirect
+                router.go({ name: 'Login' });
+            });
     }
 
     /**
@@ -88,6 +92,15 @@ class Back {
             .post(url, null, Back.HEADERS)
             .then(res => res)
             .catch(err => console.log(err));
+    }
+
+    static logout() {
+        const LOGIN_NAME = 'Login';
+
+        // redirect
+        router.go({ name: LOGIN_NAME });
+
+        // clean localstorage
     }
 }
 
