@@ -21,6 +21,8 @@
 
 <script>
 import GoogleLogin from 'vue-google-login';
+// import axios from 'axios';
+import Back from '@/utils/Back';
 
 export default {
     components: {
@@ -44,15 +46,16 @@ export default {
         onSuccess(googleUser) {
             const basicProfile = googleUser.getBasicProfile();
             const token = googleUser.uc.id_token;
+            const id = basicProfile.kR;
 
             // This only gets the user information: id, name, imageUrl and email
             this.$store.commit('SET_USER_DATA', basicProfile);
 
-            // Sets token
-            this.$store.commit('SET_USER_TOKEN', token);
+            // authenticate on backend
+            Back.Authenticate(token, id);
 
             // Redirect
-            this.$router.push({ name: 'Home' });
+            this.$router.go({ name: 'Home' });
         }
     }
 };

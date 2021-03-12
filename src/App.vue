@@ -43,7 +43,8 @@
 </template>
 
 <script>
-import Func from '@/utils/Func';
+import Back from '@/utils/Back';
+
 export default {
     name: 'App',
 
@@ -62,7 +63,7 @@ export default {
     },
     methods: {
         async setLogged() {
-            this.isLoggedIn = await Func.isAuthenticated();
+            this.isLoggedIn = await Back.isAuthenticated();
         },
 
         setUserProfile() {

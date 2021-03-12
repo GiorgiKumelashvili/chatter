@@ -103,10 +103,6 @@ export default new Vuex.Store({
             state.messages.push(payload);
 
             Func.scrollToBottom('mees');
-        },
-
-        SET_USER_TOKEN(_, payload) {
-            localStorage.setItem('token', payload);
         }
     },
     actions: {

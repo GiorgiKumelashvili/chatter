@@ -1,37 +1,94 @@
-// import wholeCardRefresh from '@/components/globals/cards/wholeCardRefresh';
-// import store from '@/store/index';
-// import axios from 'axios';
-// import Const from './Const';
+import Vue from 'vue';
+import { LoaderPlugin } from 'vue-google-login';
+import Axios from './Axios';
 
-// const back = axios.create({
-//     baseURL: 'http://localhost:8000/api'
-// });
+// retrieve axios objects
+const { back, backWithoutToken } = Axios;
 
-// back.interceptors.request.use(config => {
-//     const accessToken = localStorage.getItem(Const.names.token);
-//     config.headers.Authorization = `Bearer ${accessToken}`;
+class Back {
+    static HEADERS = { withCredentials: true };
 
-//     return config;
-// });
+    /**
+     * Connnects To Backend
+     * Send access token and user id on every call
+     *
+     * @param {String} url - url for backendcd
+     * @param {Object} obj - object for sending to backend
+     * @returns {Promise}
+     */
+    static Service(url, obj = null) {
+        return back
+            .post(url, obj)
+            .then(res => res.data)
+            .catch(err => err);
+    }
 
-// class Back {
-//     /**
-//      * Connnects To Backend
-//      * Send access token and user id on every call
-//      *
-//      * @param {String} url - url for backend
-//      * @param {Object} obj - object for sending to backend via json
-//      */
-//     static async Service(url, obj = null) {
-//         if (!store.getters.UserId) {
-//             await store.dispatch('getUserCredential');
-//         }
+    /**
+     * Connnects to backend and authenticates user
+     * plus sets httpOnly access_token cookie for
+     * authorization of api
+     *
+     * @param {String} token - google id_token for backend (e.g password)
+     * @param {Number} id   - google user id for token creation
+     * @returns {null}
+     */
+    static async Authenticate(token, id) {
+        const obj = { id_token: token };
+        const obj2 = { id };
 
-//         return back
-//             .post(url, { ...obj, user_id: store.getters.UserId })
-//             .then(res => res.data)
-//             .catch(err => err);
-//     }
-// }
+        try {
+            // create user and then access_token
+            await backWithoutToken.post('/authenticate', obj, Back.HEADERS);
+            await backWithoutToken.post(`token/create`, obj2, Back.HEADERS);
 
-// export default Back;
+            // const { data: data1 } = await backWithoutToken.post('/authenticate', obj, Back.HEADERS);
+            // const { data: data2 } = await backWithoutToken.post(`token/create`, obj2, Back.HEADERS);
+            // console.log(data1);
+            // console.log(data2);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    /**
+     * Verifys if user is authenticated by
+     * using google plugin and google
+     * client id which is registered on my
+     * google cloud console in [giorg.kumelashvili21@gmail.com]
+     *
+     * @returns {Boolean}
+     */
+    static async isAuthenticated() {
+        Vue.use(LoaderPlugin, {
+            client_id: process.env.VUE_APP_GOOGLE_ID
+        });
+
+        let bool = false;
+
+        try {
+            const auth2 = await Vue.GoogleAuth;
+            bool = auth2.isSignedIn.get();
+        } catch (error) {
+            console.log(error);
+        }
+
+        return bool;
+    }
+
+    /**
+     * Retrieves access_token from backend
+     * and returns promise
+     *
+     * @returns {Promise}
+     */
+    static retrieveToken() {
+        const url = '/authenticate/retrieve';
+
+        return backWithoutToken
+            .post(url, null, Back.HEADERS)
+            .then(res => res)
+            .catch(err => console.log(err));
+    }
+}
+
+export default Back;

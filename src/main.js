@@ -29,5 +29,5 @@ new Vue({
 
     ( ) message send area resize problem
     ( ) responsivnes for mobile
-    ( ) remove stuff from localstorage when logged out !!!
+    ( ) remove stuff from localstorage and cookies when logged out !!!
 */

@@ -30,9 +30,8 @@
 
 <script>
 import Func from '@/utils/Func';
+import Back from '@/utils/Back';
 import GoogleLogin from 'vue-google-login';
-
-import axios from 'axios';
 
 export default {
     components: {
@@ -61,12 +60,9 @@ export default {
         logout() {
             this.$router.go({ name: 'Login' });
         },
-        test() {
-            // auth on backend
-            const url = 'http://localhost:8000/api/test';
-            const obj = { token: localStorage.getItem('token') };
-
-            axios.post(url, obj).then(res => console.log(res));
+        async test() {
+            const d = await Back.Service('/test');
+            console.log(d);
         }
     }
 };

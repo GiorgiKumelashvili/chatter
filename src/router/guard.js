@@ -1,8 +1,8 @@
 import router from '@/router/router';
-import Func from '@/utils/Func';
+import Back from '@/utils/Back';
 
 router.beforeEach(async (to, from, next) => {
-    const authenticated = await Func.isAuthenticated();
+    const authenticated = await Back.isAuthenticated();
 
     if (to.name !== 'Login' && !authenticated) next({ name: 'Login' });
     else if (to.name == 'Login' && authenticated) next({ name: 'Home' });
