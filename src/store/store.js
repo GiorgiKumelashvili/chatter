@@ -121,13 +121,9 @@ export default new Vuex.Store({
             ctx.commit('SET_NEW_MESSAGE', payload);
         },
 
-        setMessages(ctx, payload) {
-            ctx.commit('SET_MESSAGES', payload);
-        },
-
         async getMessages(ctx) {
             const messages = await Back.Service('/messages');
-            ctx.dispatch('setMessages', messages.data);
+            ctx.commit('SET_MESSAGES', messages.data);
         }
     },
     getters: {

@@ -56,7 +56,10 @@ export default {
 
     created() {
         this.setUserProfile();
-        this.$store.dispatch('getMessages');
+
+        if (this.isProfileSet) {
+            this.$store.dispatch('getMessages');
+        }
     },
 
     methods: {
