@@ -12,10 +12,11 @@
                     }"
                 >
                     <v-avatar v-if="message.user_id != profile.id" size="30">
-                        <img
+                        <img :src="message.image_url" alt="John" />
+                        <!-- <img
                             src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
                             alt="John"
-                        />
+                        /> -->
                     </v-avatar>
 
                     <p
@@ -69,15 +70,24 @@ export default {
         messagesKey: 'some key',
 
         // Profile
-        profile: {
-            id: '107001323067694768810'
-        }
+        profile: null
     }),
+
+    created() {
+        this.profile = {
+            id: this.$store.getters.id,
+            fullName: this.$store.getters.fullName,
+            email: this.$store.getters.email,
+            img: this.$store.getters.img
+        };
+    },
     mounted() {
         this.heightObeserving();
+
         // start from bottom page
         Func.scrollToBottom('mees');
     },
+
     methods: {
         heightObeserving() {
             const el = this.$refs['message-arrea']?.$el;
@@ -91,22 +101,18 @@ export default {
             // start observing a DOM node
             resizeObserver.observe(el);
         },
+
         send() {
             if (!this.message) {
                 return;
             }
 
             // send message
-            const newMessageObject = {
+            this.$store.dispatch('setNewMessage', {
                 text: this.message,
                 user_id: this.profile.id,
-                imageUrl: this.profile.imageUrl,
-                index: this.$store.getters.maxIndex + 1
-            };
-
-            console.log(newMessageObject);
-
-            this.$store.dispatch('setMessage', newMessageObject);
+                imageUrl: this.profile.imageUrl
+            });
 
             // resize height
             this.height = 0;
@@ -114,13 +120,10 @@ export default {
             // clear message place
             this.message = null;
         },
+
         chatKey(prop) {
             return `${prop}-${Math.random()}`;
         }
-    },
-    async created() {
-        // const res = await Func.userData();
-        // profile.value = res;
     },
 
     computed: {

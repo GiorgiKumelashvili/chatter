@@ -43,12 +43,7 @@ class Back {
         try {
             // create user and then access_token
             await backWithoutToken.post('/authenticate', obj, Back.HEADERS);
-            await backWithoutToken.post(`token/create`, obj2, Back.HEADERS);
-
-            // const { data: data1 } = await backWithoutToken.post('/authenticate', obj, Back.HEADERS);
-            // const { data: data2 } = await backWithoutToken.post(`token/create`, obj2, Back.HEADERS);
-            // console.log(data1);
-            // console.log(data2);
+            await backWithoutToken.post('/token/create', obj2, Back.HEADERS);
         } catch (error) {
             console.log(error);
         }

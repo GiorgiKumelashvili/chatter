@@ -44,7 +44,7 @@ export default {
         };
     },
     methods: {
-        onSuccess(googleUser) {
+        async onSuccess(googleUser) {
             const basicProfile = googleUser.getBasicProfile();
             const token = googleUser[Const.user.idToken].id_token;
             const id = basicProfile[Const.user.id];
@@ -53,7 +53,7 @@ export default {
             this.$store.commit('SET_USER_DATA', basicProfile);
 
             // authenticate on backend
-            Back.Authenticate(token, id);
+            await Back.Authenticate(token, id);
 
             // Redirect
             this.$router.go({ name: 'Home' });

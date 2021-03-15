@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer v-if="isLoggedIn" floating permanent app dark>
+        <v-navigation-drawer floating permanent app dark>
             <v-list dense rounded>
                 <v-list-item class="px-2 py-4">
                     <v-avatar class="mr-3">
@@ -43,8 +43,6 @@
 </template>
 
 <script>
-import Back from '@/utils/Back';
-
 export default {
     name: 'App',
 
@@ -52,20 +50,15 @@ export default {
         items: [
             { title: 'Chat Group', icon: 'mdi-forum', name: 'Home' },
             { title: 'Profile', icon: 'mdi-account-circle', name: 'Profile' }
-        ],
-
-        isLoggedIn: null
+        ]
     }),
+
     created() {
-        this.setLogged();
-
         this.setUserProfile();
+        this.$store.dispatch('getMessages');
     },
-    methods: {
-        async setLogged() {
-            this.isLoggedIn = await Back.isAuthenticated();
-        },
 
+    methods: {
         setUserProfile() {
             //TODO gadaitane navigation componentshi roca gaaketeb
             const user = localStorage.getItem('user');
