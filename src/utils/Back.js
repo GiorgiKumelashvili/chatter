@@ -92,10 +92,11 @@ class Back {
     static logout() {
         const LOGIN_NAME = 'Login';
 
+        // clean localstorage
+        localStorage.removeItem('user');
+
         // redirect
         router.go({ name: LOGIN_NAME });
-
-        // clean localstorage
     }
 }
 

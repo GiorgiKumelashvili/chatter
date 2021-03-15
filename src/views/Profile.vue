@@ -24,7 +24,6 @@
                 </v-list-item>
             </GoogleLogin>
         </v-card>
-        <v-btn @click="test">test</v-btn>
     </v-container>
 </template>
 
@@ -37,15 +36,18 @@ export default {
     components: {
         GoogleLogin
     },
+
     data: () => ({
         darkMode: null,
         params: {
             client_id: process.env.VUE_APP_GOOGLE_ID
         }
     }),
+
     created() {
         this.darkMode = Func.getDarkMode();
     },
+
     methods: {
         toggleDarkMode() {
             const bool = !this.darkMode;
@@ -57,12 +59,9 @@ export default {
             // Set in local
             localStorage.setItem('darkMode', bool);
         },
+
         logout() {
             Back.logout();
-        },
-        async test() {
-            const d = await Back.Service('/test');
-            console.log(d);
         }
     }
 };

@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer floating permanent app dark>
+        <v-navigation-drawer floating permanent app dark v-if="isProfileSet">
             <v-list dense rounded>
                 <v-list-item class="px-2 py-4">
                     <v-avatar class="mr-3">
@@ -50,7 +50,8 @@ export default {
         items: [
             { title: 'Chat Group', icon: 'mdi-forum', name: 'Home' },
             { title: 'Profile', icon: 'mdi-account-circle', name: 'Profile' }
-        ]
+        ],
+        isProfileSet: false
     }),
 
     created() {
@@ -65,6 +66,7 @@ export default {
 
             if (user) {
                 this.$store.commit('SET_USER_DATA', JSON.parse(user));
+                this.isProfileSet = true;
             }
         }
     },
