@@ -25,12 +25,12 @@ new Vue({
     vuetify,
     render: h => h(App)
 }).$mount('#app');
+
 /*TODO
 
-    ( ) message send area resize problem
-    ( ) responsivnes for mobile
-    ( ) remove stuff from localstorage and cookies (access_token) when logged out !!!
-    ( ) remove all hardcode routes and get it to const
-    ( ) pagination need in group chat
-    ( ) gadaitane navigation componentshi roca gaaketeb
+    (+) message send area resize problem
+    (+) responsivnes for mobile
+    (+) gadaitane navigation componentshi roca gaaketeb
+    (+) remove all hardcode routes and get it to const
+    ( ) pagination need in group chat and page down event on load messages
 */

@@ -13,10 +13,6 @@
                 >
                     <v-avatar v-if="message.user_id != profile.id" size="30">
                         <img :src="message.image_url" alt="John" />
-                        <!-- <img
-                            src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-                            alt="John"
-                        /> -->
                     </v-avatar>
 
                     <p
@@ -33,19 +29,20 @@
         </div>
 
         <!-- Send Message area -->
-        <div class="d-flex">
+        <div class="d-flex" id="mees2">
             <v-textarea
                 label="message"
-                :key="sendMessage"
                 ref="message-arrea"
                 rows="1"
                 class="ma-0"
-                v-model="message"
-                :auto-grow="height < 88"
                 filled
                 hide-details
                 dense
                 outlined
+                v-model="message"
+                :key="sendMessage"
+                :auto-grow="height < 88"
+                @keyup.enter="send()"
             />
             <v-btn elevation="2" class="ml-3" icon @click="send()">
                 <v-icon>
@@ -135,12 +132,7 @@ export default {
 </script>
 
 <style scoped>
-/* Only for this page */
 @import '../assets/css/messaging.css';
-
-textarea#input-24 {
-    background-color: rebeccapurple !important;
-}
 
 #mees {
     max-height: 85vh;
@@ -149,19 +141,13 @@ textarea#input-24 {
     scroll-behavior: smooth;
 }
 
-#mees::-webkit-scrollbar {
-    width: 0.8rem;
-}
-
-#mees::-webkit-scrollbar-track {
-    border-radius: 20px;
-    background-color: #b0cdff;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-#mees::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    background-color: #005eff;
+@media screen and (max-device-width: 800px) {
+    #mees {
+        max-height: 80vh;
+        overflow: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
 }
 
 .message-item {

@@ -1,40 +1,29 @@
 <template>
     <v-app>
-        <v-navigation-drawer floating permanent app dark v-if="isProfileSet">
-            <v-list dense rounded>
-                <v-list-item class="px-2 py-4">
-                    <v-avatar class="mr-3">
-                        <img :src="img" alt="John" />
-                    </v-avatar>
-                    <div>
-                        <v-list-item-title class="title pb-2 text-truncate" style="max-width:10rem">
-                            {{ fullName }}
-                        </v-list-item-title>
-
-                        <v-list-item-subtitle class="text-truncate" style="max-width:10rem">
-                            {{ email }}
-                        </v-list-item-subtitle>
-                    </div>
-                </v-list-item>
-
-                <router-link
-                    v-for="item in items"
-                    :key="item.title"
-                    :to="{ name: item.name }"
-                    class="d-flex text-decoration-none"
-                >
-                    <v-list-item link>
-                        <v-list-item-icon>
-                            <v-icon>{{ item.icon }}</v-icon>
-                        </v-list-item-icon>
-
-                        <v-list-item-content>
-                            <v-list-item-title>{{ item.title }}</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </router-link>
-            </v-list>
+        <v-navigation-drawer
+            v-if="isProfileSet"
+            v-model="drawer"
+            app
+            dark
+            :temporary="toogleToSmallDevice"
+            :absolute="toogleToSmallDevice"
+            :floating="!toogleToSmallDevice"
+            :permanent="!toogleToSmallDevice"
+        >
+            <Navbar />
         </v-navigation-drawer>
+
+        <v-app-bar app dense v-if="toogleToSmallDevice && isProfileSet">
+            <v-btn icon @click="drawer = !drawer">
+                <v-icon v-if="drawer">mdi-chevron-left</v-icon>
+                <v-icon v-else>mdi-chevron-right</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+
+            <p class="text-uppercase ma-0">
+                {{ name }}
+            </p>
+        </v-app-bar>
 
         <v-main>
             <router-view></router-view>
@@ -43,17 +32,23 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
 import Socket from '@/utils/Socket';
 
 export default {
     name: 'App',
 
+    components: {
+        Navbar
+    },
+
     data: () => ({
-        items: [
-            { title: 'Chat Group', icon: 'mdi-forum', name: 'Home' },
-            { title: 'Profile', icon: 'mdi-account-circle', name: 'Profile' }
-        ],
-        isProfileSet: false
+        isProfileSet: false,
+        minWidth: 800,
+
+        // navbar
+        drawer: false,
+        toogleToSmallDevice: false
     }),
 
     created() {
@@ -73,9 +68,9 @@ export default {
 
             Socket.channel(channel).listen(listener, e => {
                 const { data } = e;
-                if (this.$store.getters.id !== data.user_id) {
+
+                if (this.$store.getters.id !== data.user_id)
                     this.$store.dispatch('setNewMessageUI', data);
-                }
             });
         },
         setUserProfile() {
@@ -87,15 +82,19 @@ export default {
             }
         }
     },
+
+    watch: {
+        '$vuetify.breakpoint.width': {
+            handler() {
+                this.toogleToSmallDevice = this.$vuetify.breakpoint.width < this.minWidth;
+            },
+            immediate: true
+        }
+    },
+
     computed: {
-        fullName() {
-            return this.$store.getters.fullName;
-        },
-        email() {
-            return this.$store.getters.email;
-        },
-        img() {
-            return this.$store.getters.img;
+        name() {
+            return this.$store.getters.name;
         }
     }
 };

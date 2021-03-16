@@ -1,7 +1,8 @@
-import router from '@/router/router';
 import Vue from 'vue';
 import { LoaderPlugin } from 'vue-google-login';
-import Axios from './Axios';
+import router from '@/router/router';
+import Axios from '@/utils/Axios';
+import Const from '@/utils/Const';
 
 // retrieve axios objects
 const { back, backWithoutToken } = Axios;
@@ -42,8 +43,8 @@ class Back {
 
         try {
             // create user and then access_token
-            await backWithoutToken.post('/authenticate', obj, Back.HEADERS);
-            await backWithoutToken.post('/token/create', obj2, Back.HEADERS);
+            await backWithoutToken.post(Const.backendRoutes.authenticate, obj, Back.HEADERS);
+            await backWithoutToken.post(Const.backendRoutes.tokenCreate, obj2, Back.HEADERS);
         } catch (error) {
             console.log(error);
         }
@@ -81,7 +82,7 @@ class Back {
      * @returns {Promise}
      */
     static retrieveToken() {
-        const url = '/token/retrieve';
+        const url = Const.backendRoutes.tokenRetrieve;
 
         return backWithoutToken
             .post(url, null, Back.HEADERS)

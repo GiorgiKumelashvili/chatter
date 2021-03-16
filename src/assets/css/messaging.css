@@ -1,3 +1,20 @@
 html {
     overflow-y: hidden !important;
 }
+
+/* Scrollbar */
+
+#mees::-webkit-scrollbar {
+    width: 0.8rem;
+}
+
+#mees::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background-color: #b0cdff;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+#mees::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: #005eff;
+}

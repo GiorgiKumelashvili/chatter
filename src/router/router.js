@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
+// First vie not lazy loaded
 import Home from '@/views/Home.vue';
 
 // lazy load

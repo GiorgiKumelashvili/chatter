@@ -1,12 +1,4 @@
 export default {
-    svgs: {
-        somesvg: ''
-    },
-
-    classes: {
-        betweenClass: 'd-flex justify-content-between align-items-center'
-    },
-
     user: {
         idToken: 'uc',
         fullName: 'sd',
@@ -17,5 +9,11 @@ export default {
         email: 'nt'
     },
 
-    routes: {}
+    backendRoutes: {
+        messageCreate: '/messages/create',
+        messageAll: '/messages',
+        authenticate: '/authenticate',
+        tokenCreate: '/token/create',
+        tokenRetrieve: '/token/retrieve'
+    }
 };

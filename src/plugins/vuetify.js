@@ -1,6 +1,6 @@
-import Func from '@/utils/Func';
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
+import Func from '@/utils/Func';
 
 Vue.use(Vuetify);
 
