@@ -79,7 +79,6 @@ export default {
             });
         },
         setUserProfile() {
-            //TODO gadaitane navigation componentshi roca gaaketeb
             const user = localStorage.getItem('user');
 
             if (user) {

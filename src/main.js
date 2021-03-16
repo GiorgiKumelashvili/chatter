@@ -32,4 +32,5 @@ new Vue({
     ( ) remove stuff from localstorage and cookies (access_token) when logged out !!!
     ( ) remove all hardcode routes and get it to const
     ( ) pagination need in group chat
+    ( ) gadaitane navigation componentshi roca gaaketeb
 */
