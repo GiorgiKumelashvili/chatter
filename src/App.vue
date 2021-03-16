@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import Socket from '@/utils/Socket';
+
 export default {
     name: 'App',
 
@@ -59,10 +61,23 @@ export default {
 
         if (this.isProfileSet) {
             this.$store.dispatch('getMessages');
+
+            this.startListeningToChannel();
         }
     },
 
     methods: {
+        startListeningToChannel() {
+            const channel = process.env.VUE_APP_WEBSOCKETS_CHANNEL;
+            const listener = process.env.VUE_APP_WEBSOCKETS_LISTEN;
+
+            Socket.channel(channel).listen(listener, e => {
+                const { data } = e;
+                if (this.$store.getters.id !== data.user_id) {
+                    this.$store.dispatch('setNewMessageUI', data);
+                }
+            });
+        },
         setUserProfile() {
             //TODO gadaitane navigation componentshi roca gaaketeb
             const user = localStorage.getItem('user');

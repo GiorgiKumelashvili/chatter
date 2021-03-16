@@ -111,7 +111,7 @@ export default {
             this.$store.dispatch('setNewMessage', {
                 text: this.message,
                 user_id: this.profile.id,
-                imageUrl: this.profile.imageUrl
+                image_url: this.profile.img
             });
 
             // resize height

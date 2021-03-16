@@ -23,7 +23,7 @@ class Back {
             .then(res => res.data)
             .catch(() => {
                 // redirect
-                router.go({ name: 'Login' });
+                router.push({ name: 'Login' });
             });
     }
 

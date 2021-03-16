@@ -112,11 +112,14 @@ export default new Vuex.Store({
             if (!Object.entries(payload).length) {
                 return null;
             }
+            Back.Service('/messages/create', payload);
+            ctx.commit('SET_NEW_MESSAGE', payload);
+        },
 
-            Back.Service('/messages/create', {
-                user_id: payload.user_id,
-                text: payload.text
-            });
+        setNewMessageUI(ctx, payload) {
+            if (!Object.entries(payload).length) {
+                return null;
+            }
 
             ctx.commit('SET_NEW_MESSAGE', payload);
         },
