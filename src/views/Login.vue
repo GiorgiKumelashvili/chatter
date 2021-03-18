@@ -56,8 +56,7 @@ export default {
             await Back.Authenticate(token, id);
 
             // Redirect
-            this.$router.push({ name: 'Home' });
-            // this.$router.go({ name: 'Home' });
+            this.$router.go({ name: 'Home' });
         }
     }
 };

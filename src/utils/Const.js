@@ -1,12 +1,12 @@
 export default {
     user: {
-        idToken: 'uc',
-        fullName: 'sd',
-        id: 'kR',
-        img: 'jI',
-        name: 'QS',
-        surname: 'SQ',
-        email: 'nt'
+        idToken: 'tc',
+        fullName: 'zt',
+        id: 'ER',
+        img: 'EI',
+        name: 'kR',
+        surname: 'oT',
+        email: 'zt'
     },
 
     backendRoutes: {
